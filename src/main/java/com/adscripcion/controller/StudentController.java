@@ -33,16 +33,16 @@ public class StudentController {
     }
 
     @PostMapping("/student/save")
-    public String save(@RequestBody Student person) {
-        String message = "";
+    public Map<String, Object> save(@RequestBody Student person) {
+        Map<String, Object> response = new HashMap<>();
         try {
             personService.save(person);
-            message  = "Successfully saved!";
-
+            response.put("message", "Successfully saved!" );
+           
         } catch (Exception e) {
-           message = e.getMessage();
+           response.put("message", e.getMessage());
         }
-        return message;
+        return response;
     }
 
     @DeleteMapping("/student/deleted/{studentId}")
